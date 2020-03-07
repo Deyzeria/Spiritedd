@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spawn : MonoBehaviour
 {
@@ -10,16 +11,45 @@ public class Spawn : MonoBehaviour
     [Space]
     public int worldSpeed = 10;
     [Space]
-    public int spaceInBetween = 4;
+    int spaceInBetween = 4;
     public int curSpace = 20;
-    public int curHoleSpace;
-    public int randNum;
-    public string bigKop;
-    
+    int curHoleSpace;
+    int randNum;
+    string bigKop;
+    public GameObject scoreText;
+    public GameObject PButton;
+    public int Score = -20;
+
+    public static Spawn Instance;
+
+
+
+    private void Start()
+    {
+        Instance = this;
+        StartCoroutine(Appear());
+    }
+
+    private IEnumerator Appear()
+    {
+        yield return new WaitForSeconds(3f);
+        scoreText.SetActive(true);
+        PButton.SetActive(true);
+    }
 
     public void OnTriggerExit(Collider other)
     {
-        spawnBlock();
+        if (other.gameObject.layer == 8)
+        {
+            spawnBlock();
+            Score++;
+            scoreText.GetComponent<Text>().text = Score.ToString();
+        }
+    }
+    
+    public void RipInPieces()
+    {
+        scoreText.SetActive(false);
     }
 
     public void spawnBlock()

@@ -18,7 +18,7 @@ public class GameStarting : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (clr > 0)
+        /*if (clr > 0)
         {
             Color temp = pic.GetComponent<Image>().color;
             clr -= difference * Time.deltaTime;
@@ -35,6 +35,6 @@ public class GameStarting : MonoBehaviour
         } else
         {
             gameObject.SetActive(false);
-        }
+        }*/
     }
 }

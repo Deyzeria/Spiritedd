@@ -13,9 +13,11 @@ public class Movement : MonoBehaviour
     public bool up = true;
     bool isAlive = true;
     private Animator anim;
+    public static Movement Instance;
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         anim = GetComponent<Animator>();
     }
 
@@ -52,6 +54,7 @@ public class Movement : MonoBehaviour
 
             if (reached == false && jumped == false)
             {
+                
                 transform.position = Vector3.MoveTowards(transform.position, groundPositions[curPos].transform.position, 10 * Time.deltaTime);
             }
 
@@ -68,7 +71,7 @@ public class Movement : MonoBehaviour
                 }
             }
 
-            if (transform.position.y >= 3.99f)
+            if (transform.position.y >= 4.99f)
             {
                 up = false;
             }
@@ -85,5 +88,34 @@ public class Movement : MonoBehaviour
         }
         
 
+    }
+
+    public void OnTriggerEnter(Collider col)
+    {
+        if (isAlive)
+        {
+            if (col.gameObject.layer == 12 || col.gameObject.layer == 9)
+            {
+                anim.SetTrigger("rip");
+                PauseTheDeath.Instance.FindAllAndFreeze();
+                Spawn.Instance.RipInPieces();
+                isAlive = false;
+            }
+
+
+            if (col.gameObject.layer == 10)
+            {
+                anim.SetTrigger("riptwo");
+                PauseTheDeath.Instance.FindAllAndFreeze();
+                Spawn.Instance.RipInPieces();
+                isAlive = false;
+
+            }
+        }
+    } 
+
+    public void pauseAnim(int spd)
+    {
+        anim.speed = spd;
     }
 }

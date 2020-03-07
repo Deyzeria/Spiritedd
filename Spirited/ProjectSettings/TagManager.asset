@@ -15,10 +15,10 @@ TagManager:
   - 
   - 
   - BlockLayer
-  - 
-  - 
-  - 
-  - 
+  - BumpLayer
+  - TreeLayer
+  - BrickLayer
+  - DeathLayer
   - 
   - 
   - 
