@@ -7,9 +7,13 @@ public class Manager : MonoBehaviour
 {
     public GameObject cube;
     private Animator anim;
+    public GameObject settingsMenu;
+    public GameObject settingsButton;
+    bool settingsOn = false;
     private void Start()
     {
         cube.SetActive(false);
+        settingsMenu.SetActive(false);
         anim = cube.GetComponent<Animator>();
     }
     private IEnumerator SwitchToLevel()
@@ -29,6 +33,21 @@ public class Manager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void SettingsMenu()
+    {
+        if (settingsOn == false)
+        {
+            settingsMenu.SetActive(true);
+            settingsButton.SetActive(false);
+            settingsOn = true;
+        } else
+        {
+            settingsMenu.SetActive(false);
+            settingsButton.SetActive(true);
+            settingsOn = false;
+        }
     }
 
 }

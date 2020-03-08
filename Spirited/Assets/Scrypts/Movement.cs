@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour
 { 
@@ -49,6 +50,13 @@ public class Movement : MonoBehaviour
                 {
                     jumped = true;
                     up = true;
+                    if (Settings.Instance.Jump.isActiveAndEnabled)
+                    {
+                        Settings.Instance.SoundJump();
+                    } else
+                    {
+                        Settings.Instance.Jump.enabled = true;
+                    }
                 }
             }
 
@@ -86,9 +94,9 @@ public class Movement : MonoBehaviour
                 }
             }
         }
-        
-
     }
+
+    
 
     public void OnTriggerEnter(Collider col)
     {
@@ -100,6 +108,11 @@ public class Movement : MonoBehaviour
                 PauseTheDeath.Instance.FindAllAndFreeze();
                 Spawn.Instance.RipInPieces();
                 isAlive = false;
+                if (Settings.Instance)
+                {
+                    Settings.Instance.Jump.enabled = false;
+                    Settings.Instance.Sound.enabled = false;
+                }
             }
 
 
@@ -109,7 +122,11 @@ public class Movement : MonoBehaviour
                 PauseTheDeath.Instance.FindAllAndFreeze();
                 Spawn.Instance.RipInPieces();
                 isAlive = false;
-
+                if (Settings.Instance)
+                {
+                    Settings.Instance.Jump.enabled = false;
+                    Settings.Instance.Sound.enabled = false;
+                }
             }
         }
     } 

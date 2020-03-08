@@ -35,6 +35,10 @@ public class Spawn : MonoBehaviour
         yield return new WaitForSeconds(3f);
         scoreText.SetActive(true);
         PButton.SetActive(true);
+        if (Settings.Instance != null)
+        {
+            Settings.Instance.TurnOnSound();
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -88,7 +92,7 @@ public class Spawn : MonoBehaviour
             }
             else if (bigKop == "113" || bigKop == "311" || bigKop == "131")
             {
-                curSpace = Random.Range(0, 2);
+                curSpace = Random.Range(1, 3);
             }
             else if (bigKop == "001" || bigKop == "010" || bigKop == "011" || bigKop == "100" || bigKop == "101" || bigKop == "110")
             {
