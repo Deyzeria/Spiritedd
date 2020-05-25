@@ -104,33 +104,15 @@ public class Movement : MonoBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
-        if (isAlive)
+        if(col.tag == "Blocks" && isAlive)
         {
-            if (col.gameObject.layer == 12 || col.gameObject.layer == 9)
+            anim.SetTrigger("rip");
+            PauseTheDeath.Instance.FindAllAndFreeze();
+            isAlive = false;
+            if (Settings.Instance)
             {
-                anim.SetTrigger("rip");
-                PauseTheDeath.Instance.FindAllAndFreeze();
-                Spawn.Instance.RipInPieces();
-                isAlive = false;
-                if (Settings.Instance)
-                {
-                    Settings.Instance.Jump.enabled = false;
-                    Settings.Instance.Sound.enabled = false;
-                }
-            }
-
-
-            if (col.gameObject.layer == 10)
-            {
-                anim.SetTrigger("riptwo");
-                PauseTheDeath.Instance.FindAllAndFreeze();
-                Spawn.Instance.RipInPieces();
-                isAlive = false;
-                if (Settings.Instance)
-                {
-                    Settings.Instance.Jump.enabled = false;
-                    Settings.Instance.Sound.enabled = false;
-                }
+                Settings.Instance.Jump.enabled = false;
+                Settings.Instance.Sound.enabled = false;
             }
         }
     } 

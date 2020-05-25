@@ -19,11 +19,30 @@ public class PauseTheDeath : MonoBehaviour
     public Slider musicASlider;
     public Slider soundASlider;
 
+    public GameObject scoreText;
+    public GameObject PButton;
+
     public Text DeathText, DeathTextBack;
-    // Start is called before the first frame update
+
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+        scoreText.SetActive(true);
+        PButton.SetActive(true);
+        if (Settings.Instance != null)
+        {
+            Settings.Instance.TurnOnSound();
+        }
+        
         Menu.SetActive(false);
         DeathMenu.SetActive(false);
 
@@ -39,18 +58,21 @@ public class PauseTheDeath : MonoBehaviour
 
     public void FindAllAndFreeze()
     {
+        scoreText.SetActive(false);
         GameObject[] objs;
         objs = GameObject.FindGameObjectsWithTag("Blocks");
         foreach (GameObject Blockk in objs)
         {
-            Blockk.GetComponent<Block>().speed = 0;
+            Blockk.GetComponent<ObjectMovement>().speed = 0;
         }
-        PauseButton.SetActive(false);
-        DeadImage.GetComponent<Animator>().SetTrigger("Dead");
+        GameStageControl.Instance.turnGame(false);
 
-        DeathMenu.SetActive(true);
-        DeathText.GetComponent<Text>().text = Spawn.Instance.Score.ToString();
-        DeathTextBack.GetComponent<Text>().text = Spawn.Instance.Score.ToString();
+        PauseButton.SetActive(false);
+        //DeadImage.GetComponent<Animator>().SetTrigger("Dead");
+
+        //DeathMenu.SetActive(true);
+        DeathText.GetComponent<Text>().text = ScoreSystem.Instance.finalscore.ToString();
+        DeathTextBack.GetComponent<Text>().text = ScoreSystem.Instance.finalscore.ToString();
 
     }
 
@@ -89,7 +111,6 @@ public class PauseTheDeath : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("A");
         DeadImage.GetComponent<Animator>().SetTrigger("NewGamePlus");
         DeathMenu.SetActive(false);
         StartCoroutine(SwitchToLevel());
@@ -97,14 +118,17 @@ public class PauseTheDeath : MonoBehaviour
 
     public void StopWaitAMinute()
     {
+        scoreText.SetActive(false);
         Settings.Instance.Jump.enabled = false;
         Settings.Instance.Sound.enabled = false;
         GameObject[] objs;
         objs = GameObject.FindGameObjectsWithTag("Blocks");
         foreach (GameObject Blockk in objs)
         {
-            Blockk.GetComponent<Block>().speed = 0;
+            Blockk.GetComponent<ObjectMovement>().speed = 0;
         }
+        GameStageControl.Instance.turnGame(false);
+
         PauseButton.SetActive(false);
         DeadImage.GetComponent<Animator>().SetTrigger("Paused");
         DeadImage.GetComponent<Animator>().SetBool("Paus", true);
@@ -114,14 +138,18 @@ public class PauseTheDeath : MonoBehaviour
 
     public void resumeDatShit()
     {
+        scoreText.SetActive(true);
         Settings.Instance.Jump.enabled = true;
         Settings.Instance.Sound.enabled = true;
         GameObject[] objs;
         objs = GameObject.FindGameObjectsWithTag("Blocks");
         foreach (GameObject Blockk in objs)
         {
-            Blockk.GetComponent<Block>().speed = Spawn.Instance.worldSpeed;
+            Blockk.GetComponent<ObjectMovement>().speed = Spawn.Instance.worldSpeed;
         }
+        GameStageControl.Instance.turnGame(true);
+
+
         PauseButton.SetActive(true);
         DeadImage.GetComponent<Animator>().ResetTrigger("Paused");
         DeadImage.GetComponent<Animator>().SetBool("Paus", false);

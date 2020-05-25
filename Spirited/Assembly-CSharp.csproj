@@ -70,6 +70,8 @@
     <Compile Include="Assets\Scrypts\BetaScripts\GroundShaper.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\Movement.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\ObjectMovement.cs" />
+    <Compile Include="Assets\Scrypts\BetaScripts\PipeMove.cs" />
+    <Compile Include="Assets\Scrypts\BetaScripts\PipeSpawn.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\ScoreSystem.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\SpawnerTwo.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\TestScrypt.cs" />

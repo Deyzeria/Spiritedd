@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455069442228848071}
   - component: {fileID: 455069442228848068}
+  - component: {fileID: 1893524229836331412}
   m_Layer: 0
   m_Name: BoxColLarge
   m_TagString: Untagged
@@ -44,6 +45,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.6211343, z: 1.8136702}
   m_Center: {x: 0, y: 1.031851, z: -0.116826296}
+--- !u!54 &1893524229836331412
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455069442228848069}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &455069443499048603
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455069443499048677}
   - component: {fileID: 455069443499048602}
+  - component: {fileID: 2564274564629328122}
   m_Layer: 0
   m_Name: BoxColSmall
   m_TagString: Untagged
@@ -88,6 +106,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.7825222, z: 0.94528055}
   m_Center: {x: 0, y: -0.17420149, z: -0.03407526}
+--- !u!54 &2564274564629328122
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455069443499048603}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &455069443687502742
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 455069443687502736}
   - component: {fileID: 455069443687502737}
-  - component: {fileID: 8459302008819135118}
   m_Layer: 0
   m_Name: BushTwo
   m_TagString: Blocks
@@ -140,22 +173,6 @@ MonoBehaviour:
   BoxColL: {fileID: 455069442228848069}
   BoxColLong: {fileID: 0}
   speed: 0
---- !u!54 &8459302008819135118
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455069443687502742}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1001 &4400188443974918815
 PrefabInstance:
   m_ObjectHideFlags: 0

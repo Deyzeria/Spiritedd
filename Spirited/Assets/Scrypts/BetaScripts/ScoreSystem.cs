@@ -5,21 +5,42 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
+    public static ScoreSystem Instance;
     public Text texter;
-    long finalscore;
+    public Light lightObj;
+    [HideInInspector]
+    public long finalscore;
+    public float intensityMod;
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         StartCoroutine("scorSystem");
     }
 
     IEnumerator scorSystem()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(0.5f);
             finalscore++;
             texter.GetComponent<Text>().text = finalscore.ToString();
+            if (intensityMod < 60) {
+                intensityMod++;
+                lightObj.intensity = intensityMod / 10;
+            }
+
+            if(finalscore == 15)
+            {
+                GameStageControl.Instance.SwitchBiomeToFact();
+            }
         }
     }
 }
