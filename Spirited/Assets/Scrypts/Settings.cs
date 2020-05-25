@@ -17,7 +17,14 @@ public class Settings : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        }else
+        {
+            Destroy(this);
+        }
+        
         DontDestroyOnLoad(gameObject);
         Sound.enabled = false;
         Jump.enabled = false;
