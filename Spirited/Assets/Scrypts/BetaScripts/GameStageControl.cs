@@ -25,6 +25,8 @@ public class GameStageControl : MonoBehaviour
 
     public byte levelP = 1;
 
+    public GameObject flasher;
+
     private void Start()
     {
         if (Instance == null)
@@ -36,11 +38,12 @@ public class GameStageControl : MonoBehaviour
             Destroy(this);
         }
         ChangeSpeed(globalSpeed);
+    }
 
-
+    public void AllAboardTheSkipIsStarting()
+    {
         grassBiome.gameOn = true;
         grassBiome.StartTheGame();
-
     }
 
     public void turnGame(bool turnGameBool)
@@ -82,25 +85,33 @@ public class GameStageControl : MonoBehaviour
     {
         grassBiome.gameOn = false;
         PipeSpawn.Instance.SpawnThePipe();
-        yield return new WaitForSeconds(3f);
+
+        yield return new WaitForSeconds(6f);
+        flasher.GetComponent<Animator>().SetTrigger("Flash");
+        Settings.Instance.ChangeMusicClip(2);
+        yield return new WaitForSeconds(2f);
+
         mainGround.GetComponent<MeshRenderer>().material = factoryMain;
         leftGround.GetComponent<MeshRenderer>().material = factoryBackL;
         rightGround.GetComponent<MeshRenderer>().material = factoryBackR;
         factoryBiome.gameOn = true;
         factoryBiome.StartTheGame();
-        Settings.Instance.ChangeMusicClip(2);
     }
 
     public IEnumerator SwitchBiomeToForest()
     {
         factoryBiome.gameOn = false;
         PipeSpawn.Instance.SpawnThePipe();
-        yield return new WaitForSeconds(3f);
+
+        yield return new WaitForSeconds(6f);
+        flasher.GetComponent<Animator>().SetTrigger("Flash");
+        Settings.Instance.ChangeMusicClip(1);
+        yield return new WaitForSeconds(1.5f);
+
         mainGround.GetComponent<MeshRenderer>().material = grassMain;
         leftGround.GetComponent<MeshRenderer>().material = grassBack;
         rightGround.GetComponent<MeshRenderer>().material = grassBack;
         grassBiome.gameOn = true;
         grassBiome.StartTheGame();
-        Settings.Instance.ChangeMusicClip(1);
     }
 }

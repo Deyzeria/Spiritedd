@@ -7,10 +7,8 @@ public class ScoreSystem : MonoBehaviour
 {
     public static ScoreSystem Instance;
     public Text texter;
-    public Light lightObj;
     [HideInInspector]
     public long finalscore;
-    public float intensityMod;
     byte level = 1;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +21,6 @@ public class ScoreSystem : MonoBehaviour
         {
             Destroy(this);
         }
-        StartCoroutine("scorSystem");
     }
 
     public void startcor()
@@ -43,19 +40,15 @@ public class ScoreSystem : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             finalscore++;
             texter.GetComponent<Text>().text = finalscore.ToString();
-            if (intensityMod < 60) {
-                intensityMod++;
-                lightObj.intensity = intensityMod / 10;
-            }
 
-            if (finalscore == 25 || finalscore == 125 || finalscore == 200)
+            if (finalscore == 50 || finalscore == 200 || finalscore == 400)
             {
                 level = 2;
                 GameStageControl.Instance.levelP = level;
                 GameStageControl.Instance.StartCoroutine("SwitchBiomeToFact");
             }
 
-            if (finalscore == 75 || finalscore == 175 || finalscore == 200)
+            if (finalscore == 100 || finalscore == 300 || finalscore == 500)
             {
                 level = 1;
                 GameStageControl.Instance.levelP = level;

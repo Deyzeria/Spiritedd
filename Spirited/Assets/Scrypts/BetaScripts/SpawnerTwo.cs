@@ -43,7 +43,7 @@ public class SpawnerTwo : MonoBehaviour
             {
                 if (mustReset)
                 {
-                    yield return new WaitForSeconds(curResetSpeed);
+                    yield return new WaitForSecondsRealtime(curResetSpeed);
                     if (spawnsleft > 0)
                     {
                         spawnsleft--;

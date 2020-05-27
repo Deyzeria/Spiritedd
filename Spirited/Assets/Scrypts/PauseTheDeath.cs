@@ -22,6 +22,8 @@ public class PauseTheDeath : MonoBehaviour
     public GameObject scoreText;
     public GameObject PButton;
 
+    public GameObject Tutorial;
+
     public Text DeathText, DeathTextBack;
 
 
@@ -35,7 +37,7 @@ public class PauseTheDeath : MonoBehaviour
         {
             Destroy(this);
         }
-
+        Tutorial.SetActive(true);
         scoreText.SetActive(true);
         PButton.SetActive(true);
         if (Settings.Instance != null)
@@ -54,6 +56,14 @@ public class PauseTheDeath : MonoBehaviour
             musicASlider.GetComponent<Slider>().value = musicAVolume;
             soundASlider.GetComponent<Slider>().value = soundAVolume;
         }
+    }
+
+    public void StartTheGame()
+    {
+        Tutorial.SetActive(false);
+        Debug.Log("AAAAAAAAA");
+        GameStageControl.Instance.AllAboardTheSkipIsStarting();
+        ScoreSystem.Instance.startcor();
     }
 
     public void FindAllAndFreeze()
@@ -112,7 +122,7 @@ public class PauseTheDeath : MonoBehaviour
 
     public void StartGame()
     {
-        DeadImage.GetComponent<Animator>().SetTrigger("NewGamePlus");
+        //DeadImage.GetComponent<Animator>().SetTrigger("NewGamePlus");
         DeathMenu.SetActive(false);
         StartCoroutine(SwitchToLevel());
     }

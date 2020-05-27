@@ -17,18 +17,19 @@ public class Settings : MonoBehaviour
     public AudioClip Menu, Forest, Factory;
 
     byte trackNumber;
-    
+
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
-        }else
+            DontDestroyOnLoad(Instance);
+        }
+        else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         
-        DontDestroyOnLoad(gameObject);
         Sound.enabled = false;
         Jump.enabled = false;
     }
