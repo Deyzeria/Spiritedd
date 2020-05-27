@@ -25,6 +25,16 @@ public class ScoreSystem : MonoBehaviour
         StartCoroutine("scorSystem");
     }
 
+    public void startcor()
+    {
+        StartCoroutine("scorSystem");
+    }
+
+    public void stopCor()
+    {
+        StopCoroutine("scorSystem");
+    }
+
     IEnumerator scorSystem()
     {
         while (true)

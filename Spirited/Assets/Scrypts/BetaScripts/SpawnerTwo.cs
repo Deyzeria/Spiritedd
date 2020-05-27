@@ -71,7 +71,7 @@ public class SpawnerTwo : MonoBehaviour
                                 pos1_1 = Random.Range(0, 3);
                             }
                         }
-                        ObjectSpawn(pos1_1, "oneblock");
+                        ObjectSpawn(pos1_1, "oneblock", false);
                         break;
 
                     case 2:
@@ -83,7 +83,7 @@ public class SpawnerTwo : MonoBehaviour
                                 pos2_1 = Random.Range(0, 3);
                             }
                         }
-                        ObjectSpawn(pos2_1, "oneblock");
+                        ObjectSpawn(pos2_1, "oneblock", false);
                         break;
 
                     case 3:
@@ -93,28 +93,28 @@ public class SpawnerTwo : MonoBehaviour
                         {
                             pos3_2 = Random.Range(0, 3);
                         }
-                        ObjectSpawn(pos3_1, "oneblock");
-                        ObjectSpawn(pos3_2, "oneblock");
+                        ObjectSpawn(pos3_1, "oneblock", false);
+                        ObjectSpawn(pos3_2, "oneblock", false);
                         break;
 
                     case 4:
-                        ObjectSpawn(0, "oneblock");
-                        ObjectSpawn(1, "oneblock");
-                        ObjectSpawn(2, "oneblock");
+                        ObjectSpawn(0, "oneblock", false);
+                        ObjectSpawn(1, "oneblock", true);
+                        ObjectSpawn(2, "oneblock", false);
                         break;
 
                     case 5:
-                        ObjectSpawn(1, "fulllane");
+                        ObjectSpawn(1, "fulllane", false);
                         break;
 
                     case 6:
                         int pos6_1 = Random.Range(0, 3);
                         longLanePos = pos6_1;
-                        ObjectSpawn(pos6_1, "longlane");
+                        ObjectSpawn(pos6_1, "longlane", false);
                         break;
 
                     case 7:
-                        ObjectSpawn(1, "special");
+                        ObjectSpawn(1, "special", false);
                         break;
 
                 }
@@ -130,12 +130,19 @@ public class SpawnerTwo : MonoBehaviour
         }
     }
 
-    void ObjectSpawn(int place, string type)
+    void ObjectSpawn(int place, string type, bool forced)
     {
         switch (type)
         {
             case "oneblock":
-                spawnedObject = Instantiate(oneBlockObject[Random.Range(0, oneBlockObject.Count)], new Vector3(targets[place].transform.position.x, targets[place].transform.position.y, targets[place].transform.position.z), Quaternion.identity);
+                if (!forced)
+                {
+                    spawnedObject = Instantiate(oneBlockObject[Random.Range(0, oneBlockObject.Count)], new Vector3(targets[place].transform.position.x, targets[place].transform.position.y, targets[place].transform.position.z), Quaternion.identity);
+                } else
+                {
+                    spawnedObject = Instantiate(oneBlockObject[0], new Vector3(targets[place].transform.position.x, targets[place].transform.position.y, targets[place].transform.position.z), Quaternion.identity);
+
+                }
                 spawnedObject.GetComponent<ObjectMovement>().speed = objSpeed;
                 break;
 

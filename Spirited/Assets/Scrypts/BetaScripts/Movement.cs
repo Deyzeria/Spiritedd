@@ -104,7 +104,8 @@ public class Movement : MonoBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "Blocks" && isAlive)
+        Debug.Log("Collided");
+        if(col.tag == "Blocks" || col.transform.parent.tag == "Blocks" && isAlive)
         {
             anim.SetTrigger("rip");
             PauseTheDeath.Instance.FindAllAndFreeze();

@@ -66,6 +66,7 @@ public class PauseTheDeath : MonoBehaviour
             Blockk.GetComponent<ObjectMovement>().speed = 0;
         }
         GameStageControl.Instance.turnGame(false);
+        ScoreSystem.Instance.stopCor();
 
         PauseButton.SetActive(false);
         //DeadImage.GetComponent<Animator>().SetTrigger("Dead");
@@ -128,6 +129,7 @@ public class PauseTheDeath : MonoBehaviour
             Blockk.GetComponent<ObjectMovement>().speed = 0;
         }
         GameStageControl.Instance.turnGame(false);
+        ScoreSystem.Instance.stopCor();
 
         PauseButton.SetActive(false);
         DeadImage.GetComponent<Animator>().SetTrigger("Paused");
@@ -145,9 +147,10 @@ public class PauseTheDeath : MonoBehaviour
         objs = GameObject.FindGameObjectsWithTag("Blocks");
         foreach (GameObject Blockk in objs)
         {
-            Blockk.GetComponent<ObjectMovement>().speed = Spawn.Instance.worldSpeed;
+            Blockk.GetComponent<ObjectMovement>().speed = GameStageControl.Instance.globalSpeed;
         }
         GameStageControl.Instance.turnGame(true);
+        ScoreSystem.Instance.startcor();
 
 
         PauseButton.SetActive(true);
