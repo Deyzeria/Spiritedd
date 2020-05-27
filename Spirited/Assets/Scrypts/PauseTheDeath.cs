@@ -98,10 +98,10 @@ public class PauseTheDeath : MonoBehaviour
         soundAVolume = soundASlider.GetComponent<Slider>().value;
     }
 
-    private IEnumerator SwitchToLevel()
+    private IEnumerator SwitchToLevel(int scenen)
     {
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(1);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scenen);
     }
 
     public void SettingsMenu()
@@ -123,8 +123,9 @@ public class PauseTheDeath : MonoBehaviour
     public void StartGame()
     {
         //DeadImage.GetComponent<Animator>().SetTrigger("NewGamePlus");
+        Settings.Instance.ChangeMusicClip(1);
         DeathMenu.SetActive(false);
-        StartCoroutine(SwitchToLevel());
+        StartCoroutine(SwitchToLevel(1));
     }
 
     public void StopWaitAMinute()
@@ -172,6 +173,7 @@ public class PauseTheDeath : MonoBehaviour
 
     public void Quit()
     {
-        SceneManager.LoadScene(0);
+        Settings.Instance.ChangeMusicClip(3);
+        StartCoroutine(SwitchToLevel(0));
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scrypts\BetaScripts\GroundShaper.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\Movement.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\ObjectMovement.cs" />
+    <Compile Include="Assets\Scrypts\BetaScripts\PhoneMovement.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\PipeMove.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\PipeSpawn.cs" />
     <Compile Include="Assets\Scrypts\BetaScripts\ScoreSystem.cs" />
@@ -82,8 +83,11 @@
     <Compile Include="Assets\Scrypts\Manager.cs" />
     <Compile Include="Assets\Scrypts\MovementMobile.cs" />
     <Compile Include="Assets\Scrypts\PauseTheDeath.cs" />
+    <Compile Include="Assets\Scrypts\PhoneControl\SwipeDetector.cs" />
+    <Compile Include="Assets\Scrypts\PhoneControl\SwipeLogger.cs" />
     <Compile Include="Assets\Scrypts\Settings.cs" />
     <Compile Include="Assets\Scrypts\Spawn.cs" />
+    <Compile Include="Assets\SwipeDetector\SwipeDrawer.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/vikba/Documents/GitHub/Spiritedd/Spirited/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

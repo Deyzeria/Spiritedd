@@ -50,8 +50,8 @@ public class Settings : MonoBehaviour
         while (killthemusic)
         {
             yield return new WaitForSeconds(0.2f);
-            Music.volume -= 0.1f;
-            if (Music.volume < 0.2f)
+            Music.volume -= 0.13f;
+            if (Music.volume < 0.1f)
             {
                 killthemusic = false;
             }
