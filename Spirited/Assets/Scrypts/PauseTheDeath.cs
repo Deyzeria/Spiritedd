@@ -71,7 +71,7 @@ public class PauseTheDeath : MonoBehaviour
         PauseButton.SetActive(false);
         //DeadImage.GetComponent<Animator>().SetTrigger("Dead");
 
-        //DeathMenu.SetActive(true);
+        DeathMenu.SetActive(true);
         DeathText.GetComponent<Text>().text = ScoreSystem.Instance.finalscore.ToString();
         DeathTextBack.GetComponent<Text>().text = ScoreSystem.Instance.finalscore.ToString();
 
@@ -132,8 +132,8 @@ public class PauseTheDeath : MonoBehaviour
         ScoreSystem.Instance.stopCor();
 
         PauseButton.SetActive(false);
-        DeadImage.GetComponent<Animator>().SetTrigger("Paused");
-        DeadImage.GetComponent<Animator>().SetBool("Paus", true);
+        //DeadImage.GetComponent<Animator>().SetTrigger("Paused");
+        //DeadImage.GetComponent<Animator>().SetBool("Paus", true);
         Movement.Instance.pauseAnim(0);
         Menu.SetActive(true);
     }
@@ -154,8 +154,8 @@ public class PauseTheDeath : MonoBehaviour
 
 
         PauseButton.SetActive(true);
-        DeadImage.GetComponent<Animator>().ResetTrigger("Paused");
-        DeadImage.GetComponent<Animator>().SetBool("Paus", false);
+        //DeadImage.GetComponent<Animator>().ResetTrigger("Paused");
+        //DeadImage.GetComponent<Animator>().SetBool("Paus", false);
         Movement.Instance.pauseAnim(1);
         Menu.SetActive(false);
     }

@@ -23,6 +23,8 @@ public class GameStageControl : MonoBehaviour
 
     public float globalSpeed;
 
+    public byte levelP = 1;
+
     private void Start()
     {
         if (Instance == null)
@@ -39,28 +41,33 @@ public class GameStageControl : MonoBehaviour
         grassBiome.gameOn = true;
         grassBiome.StartTheGame();
 
-        
-
-        //SwitchBiomeToFact();
     }
 
     public void turnGame(bool turnGameBool)
     {
-        grassBiome.gameOn = turnGameBool;
-        factoryBiome.gameOn = turnGameBool;
+
         
         if (turnGameBool)
         {
             mainGround.GetComponent<GroundShaper>().scrollSpeed = middle;
             leftGround.GetComponent<GroundShaper>().scrollSpeed = left;
             rightGround.GetComponent<GroundShaper>().scrollSpeed = right;
-            grassBiome.StartTheGame();
-            factoryBiome.StartTheGame();
+            if(levelP == 1)
+            {
+                grassBiome.StartTheGame();
+                grassBiome.gameOn = turnGameBool;
+            } else
+            {
+                factoryBiome.StartTheGame();
+                factoryBiome.gameOn = turnGameBool;
+            }
         } else
         {
             mainGround.GetComponent<GroundShaper>().scrollSpeed = 0;
             leftGround.GetComponent<GroundShaper>().scrollSpeed = 0;
             rightGround.GetComponent<GroundShaper>().scrollSpeed = 0;
+            grassBiome.gameOn = turnGameBool;
+            factoryBiome.gameOn = turnGameBool;
         }
 
     }
@@ -81,6 +88,7 @@ public class GameStageControl : MonoBehaviour
         rightGround.GetComponent<MeshRenderer>().material = factoryBackR;
         factoryBiome.gameOn = true;
         factoryBiome.StartTheGame();
+        Settings.Instance.ChangeMusicClip(2);
     }
 
     public IEnumerator SwitchBiomeToForest()
@@ -93,5 +101,6 @@ public class GameStageControl : MonoBehaviour
         rightGround.GetComponent<MeshRenderer>().material = grassBack;
         grassBiome.gameOn = true;
         grassBiome.StartTheGame();
+        Settings.Instance.ChangeMusicClip(1);
     }
 }

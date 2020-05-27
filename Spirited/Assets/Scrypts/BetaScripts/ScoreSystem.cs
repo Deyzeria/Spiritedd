@@ -11,6 +11,7 @@ public class ScoreSystem : MonoBehaviour
     [HideInInspector]
     public long finalscore;
     public float intensityMod;
+    byte level = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +48,21 @@ public class ScoreSystem : MonoBehaviour
                 lightObj.intensity = intensityMod / 10;
             }
 
-            if(finalscore == 15)
+            if (finalscore == 25 || finalscore == 125 || finalscore == 200)
             {
-                GameStageControl.Instance.SwitchBiomeToFact();
+                level = 2;
+                GameStageControl.Instance.levelP = level;
+                GameStageControl.Instance.StartCoroutine("SwitchBiomeToFact");
             }
+
+            if (finalscore == 75 || finalscore == 175 || finalscore == 200)
+            {
+                level = 1;
+                GameStageControl.Instance.levelP = level;
+                GameStageControl.Instance.StartCoroutine("SwitchBiomeToForest");
+
+            }
+
         }
     }
 }

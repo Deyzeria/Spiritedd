@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Manager : MonoBehaviour
     }
     private IEnumerator SwitchToLevel()
     {
+        Settings.Instance.ChangeMusicClip(1);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(1);
     }

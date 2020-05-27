@@ -13,8 +13,11 @@ public class Settings : MonoBehaviour
     public AudioSource Music;
     public AudioSource Sound;
     public AudioSource Jump;
-    
 
+    public AudioClip Menu, Forest, Factory;
+
+    byte trackNumber;
+    
     private void Awake()
     {
         if(Instance == null)
@@ -40,6 +43,35 @@ public class Settings : MonoBehaviour
         Jump.Play(0);
     }
 
+    private IEnumerator SwitchToTrack()
+    {
+        bool killthemusic = true;
+        while (killthemusic)
+        {
+            yield return new WaitForSeconds(0.2f);
+            Music.volume -= 0.1f;
+            if (Music.volume < 0.2f)
+            {
+                killthemusic = false;
+            }
+        }
+
+        if (trackNumber == 1)
+        {
+            Music.clip = Forest;
+        }
+        else if (trackNumber == 2)
+        {
+            Music.clip = Factory;
+        }
+        else
+        {
+            Music.clip = Menu;
+        }
+        Music.volume = musicVolume;
+        Music.Play();
+    }
+
     public void ChangeMusic()
     {
         musicVolume = musicSlider.GetComponent<Slider>().value;
@@ -52,4 +84,12 @@ public class Settings : MonoBehaviour
         Sound.volume = soundVolume;
         Jump.volume = soundVolume;
     }
+
+    public void ChangeMusicClip(byte number)
+    {
+        trackNumber = number;
+        StartCoroutine("SwitchToTrack");
+    }
+
+   
 }
