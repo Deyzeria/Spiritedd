@@ -26,7 +26,6 @@ public class Manager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("A");
         cube.SetActive(true);
         anim.SetBool("Fill", true);
         StartCoroutine(SwitchToLevel());

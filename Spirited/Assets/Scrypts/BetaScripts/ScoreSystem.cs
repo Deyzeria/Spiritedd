@@ -9,6 +9,7 @@ public class ScoreSystem : MonoBehaviour
     public Text texter;
     [HideInInspector]
     public long finalscore;
+    int counter;
     byte level = 1;
     // Start is called before the first frame update
     void Start()
@@ -39,21 +40,40 @@ public class ScoreSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             finalscore++;
+            counter++;
             texter.GetComponent<Text>().text = finalscore.ToString();
 
-            if (finalscore == 50 || finalscore == 200 || finalscore == 400)
+            if (finalscore == 50)
             {
                 level = 2;
                 GameStageControl.Instance.levelP = level;
-                GameStageControl.Instance.StartCoroutine("SwitchBiomeToFact");
+                GameStageControl.Instance.DoTheSpawn();
+                GameStageControl.Instance.SpeedIncrease();
             }
 
-            if (finalscore == 100 || finalscore == 300 || finalscore == 500)
+            if (finalscore == 100)
             {
                 level = 1;
                 GameStageControl.Instance.levelP = level;
-                GameStageControl.Instance.StartCoroutine("SwitchBiomeToForest");
+                GameStageControl.Instance.DoTheSpawn();
+                GameStageControl.Instance.SpeedIncrease();
+            }
 
+            if(counter == 200)
+            {
+                level = 2;
+                GameStageControl.Instance.levelP = level;
+                GameStageControl.Instance.DoTheSpawn();
+                GameStageControl.Instance.SpeedIncrease();
+            }
+
+            if(counter == 300)
+            {
+                level = 1;
+                GameStageControl.Instance.levelP = level;
+                GameStageControl.Instance.DoTheSpawn();
+                GameStageControl.Instance.SpeedIncrease();
+                counter = 100;
             }
 
         }

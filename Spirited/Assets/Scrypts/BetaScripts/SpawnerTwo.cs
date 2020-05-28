@@ -43,47 +43,20 @@ public class SpawnerTwo : MonoBehaviour
             {
                 if (mustReset)
                 {
-                    yield return new WaitForSecondsRealtime(curResetSpeed);
-                    if (spawnsleft > 0)
-                    {
-                        spawnsleft--;
-                        randomNum = 2;
-                        forceSpawn = true;
-                    }
-                    else
-                    {
-                        randomNum = Random.Range(1, 8);
-                        forceSpawn = false;
-                        rememberNum = -1;
-                    }
+                    yield return new WaitForSeconds(curResetSpeed);
+                    randomNum = Random.Range(1, 8);
                     mustReset = false;
                 }
 
-                // 1- nothing for resetSpeed, 2,3,4 one block, 5 full lane, 6 long lane object, then rolling singular objects, 7 special object.
+                // 1, 2, 3, 4- single blocks, on 1-1-2-3 places on the lanes, 5 full lane, 6 long lane object, then rolling singular objects(not implemented, so just a singular object), 7 special object(not implemented, so just a singular object).
                 switch (randomNum)
                 {
                     case 1:
-                        int pos1_1 = Random.Range(0, 3);
-                        if (forceSpawn && pos1_1 == longLanePos)
-                        {
-                            while (pos1_1 == longLanePos)
-                            {
-                                pos1_1 = Random.Range(0, 3);
-                            }
-                        }
-                        ObjectSpawn(pos1_1, "oneblock", false);
+                        ObjectSpawn(Random.Range(0, 3), "oneblock", false);
                         break;
 
                     case 2:
-                        int pos2_1 = Random.Range(0, 3);
-                        if (forceSpawn && pos2_1 == longLanePos)
-                        {
-                            while (pos2_1 == longLanePos)
-                            {
-                                pos2_1 = Random.Range(0, 3);
-                            }
-                        }
-                        ObjectSpawn(pos2_1, "oneblock", false);
+                        ObjectSpawn(Random.Range(0, 3), "oneblock", false);
                         break;
 
                     case 3:
@@ -108,9 +81,7 @@ public class SpawnerTwo : MonoBehaviour
                         break;
 
                     case 6:
-                        int pos6_1 = Random.Range(0, 3);
-                        longLanePos = pos6_1;
-                        ObjectSpawn(pos6_1, "longlane", false);
+                        ObjectSpawn(Random.Range(0, 3), "longlane", false);
                         break;
 
                     case 7:
@@ -122,8 +93,6 @@ public class SpawnerTwo : MonoBehaviour
                 curResetSpeed = resetSpeed;
             } else
             {
-                Debug.Log("Before Crash");
-                Debug.Log("Crash");
                 StopCoroutine("SpawnerRoutine");
                 yield return new WaitForSeconds(3);
             }
@@ -161,7 +130,7 @@ public class SpawnerTwo : MonoBehaviour
                 break;
 
             case "special":
-                spawnedObject = Instantiate(oneBlockObject[Random.Range(0, specialObject.Count)], new Vector3(targets[place].transform.position.x, targets[place].transform.position.y, targets[place].transform.position.z), Quaternion.identity);
+                spawnedObject = Instantiate(oneBlockObject[Random.Range(0, oneBlockObject.Count)], new Vector3(targets[place].transform.position.x, targets[place].transform.position.y, targets[place].transform.position.z), Quaternion.identity);
                 spawnedObject.GetComponent<ObjectMovement>().speed = objSpeed;
                 break;
         }

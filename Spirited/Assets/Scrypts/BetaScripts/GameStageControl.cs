@@ -20,12 +20,15 @@ public class GameStageControl : MonoBehaviour
     public Material factoryBackR;
 
     public float left, middle, right;
-
     public float globalSpeed;
 
-    public byte levelP = 1;
+    string whichLevel;
 
+    public byte levelP = 1;
+    [HideInInspector]
     public GameObject flasher;
+
+
 
     private void Start()
     {
@@ -81,37 +84,55 @@ public class GameStageControl : MonoBehaviour
         factoryBiome.objSpeed = curGlSp;
     }
 
-    public IEnumerator SwitchBiomeToFact()
+    public void DoTheSpawn()
     {
         grassBiome.gameOn = false;
-        PipeSpawn.Instance.SpawnThePipe();
-
-        yield return new WaitForSeconds(6f);
-        flasher.GetComponent<Animator>().SetTrigger("Flash");
-        Settings.Instance.ChangeMusicClip(2);
-        yield return new WaitForSeconds(2f);
-
-        mainGround.GetComponent<MeshRenderer>().material = factoryMain;
-        leftGround.GetComponent<MeshRenderer>().material = factoryBackL;
-        rightGround.GetComponent<MeshRenderer>().material = factoryBackR;
-        factoryBiome.gameOn = true;
-        factoryBiome.StartTheGame();
-    }
-
-    public IEnumerator SwitchBiomeToForest()
-    {
         factoryBiome.gameOn = false;
         PipeSpawn.Instance.SpawnThePipe();
+        PipeSpawn.Instance.speed += 5;
 
-        yield return new WaitForSeconds(6f);
-        flasher.GetComponent<Animator>().SetTrigger("Flash");
-        Settings.Instance.ChangeMusicClip(1);
-        yield return new WaitForSeconds(1.5f);
+    }
 
-        mainGround.GetComponent<MeshRenderer>().material = grassMain;
-        leftGround.GetComponent<MeshRenderer>().material = grassBack;
-        rightGround.GetComponent<MeshRenderer>().material = grassBack;
-        grassBiome.gameOn = true;
-        grassBiome.StartTheGame();
+    public IEnumerator PipeReached()
+    {
+        Debug.Log("Started");
+        //flasher.GetComponent<Animator>().SetTrigger("Flash");
+        if(levelP == 1)
+        {
+            Settings.Instance.ChangeMusicClip(1);
+            yield return new WaitForSeconds(2f);
+            mainGround.GetComponent<MeshRenderer>().material = grassMain;
+            leftGround.GetComponent<MeshRenderer>().material = grassBack;
+            rightGround.GetComponent<MeshRenderer>().material = grassBack;
+            grassBiome.gameOn = true;
+            grassBiome.StartTheGame();
+
+            BcgSpawner.instance.level = 1;
+            BcgSpawnerRight.instance.level = 1;
+        } else if(levelP == 2)
+        {
+            Settings.Instance.ChangeMusicClip(2);
+            yield return new WaitForSeconds(2f);
+            mainGround.GetComponent<MeshRenderer>().material = factoryMain;
+            leftGround.GetComponent<MeshRenderer>().material = factoryBackL;
+            rightGround.GetComponent<MeshRenderer>().material = factoryBackR;
+            factoryBiome.gameOn = true;
+            factoryBiome.StartTheGame();
+
+            BcgSpawner.instance.level = 2;
+            BcgSpawnerRight.instance.level = 2;
+        }
+    }
+
+    public void SpeedIncrease()
+    {
+        globalSpeed += 5;
+        ChangeSpeed(globalSpeed);
+        left += 0.3f;
+        middle += 1;
+        right += 0.3f;
+        mainGround.GetComponent<GroundShaper>().scrollSpeed = middle;
+        leftGround.GetComponent<GroundShaper>().scrollSpeed = left;
+        rightGround.GetComponent<GroundShaper>().scrollSpeed = right;
     }
 }

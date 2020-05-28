@@ -61,7 +61,6 @@ public class PauseTheDeath : MonoBehaviour
     public void StartTheGame()
     {
         Tutorial.SetActive(false);
-        Debug.Log("AAAAAAAAA");
         GameStageControl.Instance.AllAboardTheSkipIsStarting();
         ScoreSystem.Instance.startcor();
     }
@@ -130,6 +129,8 @@ public class PauseTheDeath : MonoBehaviour
 
     public void StopWaitAMinute()
     {
+        GameStageControl.Instance.turnGame(false);
+
         scoreText.SetActive(false);
         Settings.Instance.Jump.enabled = false;
         Settings.Instance.Sound.enabled = false;
@@ -139,7 +140,6 @@ public class PauseTheDeath : MonoBehaviour
         {
             Blockk.GetComponent<ObjectMovement>().speed = 0;
         }
-        GameStageControl.Instance.turnGame(false);
         ScoreSystem.Instance.stopCor();
 
         PauseButton.SetActive(false);
@@ -151,6 +151,8 @@ public class PauseTheDeath : MonoBehaviour
 
     public void resumeDatShit()
     {
+        GameStageControl.Instance.turnGame(true);
+
         scoreText.SetActive(true);
         Settings.Instance.Jump.enabled = true;
         Settings.Instance.Sound.enabled = true;
@@ -160,7 +162,6 @@ public class PauseTheDeath : MonoBehaviour
         {
             Blockk.GetComponent<ObjectMovement>().speed = GameStageControl.Instance.globalSpeed;
         }
-        GameStageControl.Instance.turnGame(true);
         ScoreSystem.Instance.startcor();
 
 
