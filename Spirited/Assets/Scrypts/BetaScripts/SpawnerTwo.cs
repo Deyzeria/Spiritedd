@@ -19,7 +19,7 @@ public class SpawnerTwo : MonoBehaviour
     public List<GameObject> targets;
 
     int longLanePos, rememberNum, spawnsleft;
-    bool forceSpawn = false;
+    //bool forceSpawn = false;
     bool firstTime = true;
 
     GameObject spawnedObject;

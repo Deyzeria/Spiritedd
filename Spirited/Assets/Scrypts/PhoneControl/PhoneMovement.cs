@@ -28,13 +28,13 @@ public class PhoneMovement : MonoBehaviour
 
     private void SwipeDetector_OnSwipe(SwipeData data)
     {
-        if(data.Direction == SwipeDirection.Left && curPos != 0)
+        if (data.Direction == SwipeDirection.Left && curPos != 0 && reached == true)
         {
             curPos--;
             reached = false;
         }
 
-        if (data.Direction == SwipeDirection.Left && curPos != 2)
+        if (data.Direction == SwipeDirection.Right && curPos != 2 && reached == true)
         {
             curPos++;
             reached = false;

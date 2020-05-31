@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8335685238306341806}
   m_Layer: 0
   m_Name: 2flowers
-  m_TagString: Untagged
+  m_TagString: Backgrounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

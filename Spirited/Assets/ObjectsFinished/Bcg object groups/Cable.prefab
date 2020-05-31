@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5240392642313565256}
   m_Layer: 0
   m_Name: Cable
-  m_TagString: Untagged
+  m_TagString: Backgrounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
